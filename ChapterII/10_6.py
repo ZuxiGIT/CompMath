@@ -96,6 +96,10 @@ def mat_norm(A):
 def CondNumber(A):
     return mat_norm(A) * mat_norm(np.linalg.inv(A)) 
 
+def error(not_corr, corr):
+    res = [abs(not_corr[i] - corr[i]) for i in range(len(not_corr))]
+    return max(res)
+
 def main():
     n = 19
 
@@ -133,6 +137,8 @@ def main():
     print(f"---->Condnumber = {CondNumber(matrix)}")
     lambdas = np.linalg.eigvals(matrix.copy())
     print(f"---->lambda_max = {max(lambdas)} lambda_min = {min(lambdas)}")
+    print(f"error = {error(Seidel(matrix.copy(), f.copy(), 1e-3), list(np.linalg.solve(matrix.copy(), f.copy())))}")
+    print(f"error = {error(Gauss(matrix.copy(), f.copy(), 1e-3), list(np.linalg.solve(matrix.copy(), f.copy())))}")
 
 
 if __name__ == "__main__":

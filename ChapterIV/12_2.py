@@ -20,12 +20,12 @@ def diff_y(f, vec, prec):
 def ro(a, b):
     return math.sqrt((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2)
 
-def Newton(func_vec, prec):
+def Newton(func_vec, prec, x_start, x_finish):
     rnd.seed()
 
     point_prec = prec * math.sqrt(2)
 
-    u_k = [rnd.uniform(-10, 10), rnd.uniform(-10, 10)]
+    u_k = [rnd.uniform(x_start, x_finish), rnd.uniform(-10, 10)]
 
     f1 = func_vec[0]
     f2 = func_vec[1]
@@ -47,7 +47,8 @@ def Newton(func_vec, prec):
     return u_k_1
 
 def main():
-    print(Newton([f1, f2], 1e-6))
+    print(Newton([f1, f2], 1e-6, 0, 10))
+    print(Newton([f1, f2], 1e-6, -10, 0))
 
 if __name__ == "__main__":
     main()

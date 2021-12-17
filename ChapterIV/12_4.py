@@ -66,7 +66,7 @@ def secants_with_loc(f, prec):
         elif(f(a) * f(c) < 0):
             b = c
 
-        print(f"[{a}, {b}]")
+        #print(f"[{a}, {b}]")
     return c
 
 def secants(f, prec):
@@ -85,10 +85,29 @@ def secants(f, prec):
     return x_k_1 
 
 
+
+def isIn(val, lst, err):
+    for i in range(len(lst)):
+        if(abs(lst[i] - val) < err):
+            return True
+    return False
+
+def solve(method, func, err):
+
+    roots = []
+    for i in range(10000):
+        temp = method(func, err)
+        if  isIn(temp, roots, err):
+            continue
+        roots.append(temp)
+
+    return roots
+
 def main():
-    print(Newton(f1, 1e-3))
-    print(secants_with_loc(f1, 1e-3))
-    print(secants(f1, 1e-3))
+
+    print(solve(Newton, f1, 1e-3))
+    #print(secants_with_loc(f1, 1e-3))
+    #print(secants(f1, 1e-3))
 
 if __name__ == "__main__":
 	main()
